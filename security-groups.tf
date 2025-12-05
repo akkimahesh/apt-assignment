@@ -1,5 +1,5 @@
 # ALB Security Group (HTTP:80 from anywhere)
-resource "aws_security_group" "ALB-SG" {
+resource "aws_security_group" "alb-sg" {
   vpc_id = aws_vpc.assignment-vpc.id
 
   ingress {
@@ -22,7 +22,7 @@ resource "aws_security_group" "ALB-SG" {
 }
 
 # EC2 Security Group (Allow HTTP:8080 from ALB Security Group)
-resource "aws_security_group" "EC2-SG" {
+resource "aws_security_group" "ec2-sg" {
   vpc_id = aws_vpc.assignment-vpc.id
 
   ingress {

@@ -5,7 +5,7 @@ resource "aws_lb" "assignment_alb" {
   name               = "assignment-alb"
   internal           = false
   load_balancer_type = "application"
-  security_groups    = [aws_security_group.ALB-SG.id]
+  security_groups    = [aws_security_group.alb-sg.id]
   subnets = [
     aws_subnet.public-1.id,
     aws_subnet.public-2.id
@@ -14,7 +14,7 @@ resource "aws_lb" "assignment_alb" {
   enable_deletion_protection = false
 
   tags = {
-    Name = "webtier-lb"
+    Name = "alb-lb"
   }
 }
 
@@ -69,7 +69,7 @@ resource "aws_launch_template" "nodejs_lt" {
     name = aws_iam_instance_profile.test_profile.name
   }
 
-  user_data = filebase64("user-data.sh")
+  user_data = file("user-data.sh")
 }
 
 
