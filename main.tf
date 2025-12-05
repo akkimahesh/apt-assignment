@@ -63,7 +63,7 @@ resource "aws_launch_template" "nodejs_lt" {
   image_id      = data.aws_ami.ubuntu_ami.id
   instance_type = "t2.micro"
 
-  vpc_security_group_ids = [aws_security_group.EC2-SG.id]
+  vpc_security_group_ids = [aws_security_group.ec2-sg.id]
 
   iam_instance_profile {
     name = aws_iam_instance_profile.test_profile.name
