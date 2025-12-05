@@ -55,52 +55,21 @@ resource "aws_lb_listener" "assignment" {
   }
 }
 
-# Launch Template
+
+# Launch Template 
+
 resource "aws_launch_template" "nodejs_lt" {
   name_prefix   = "nodejs-lt"
   image_id      = data.aws_ami.ubuntu_ami.id
-  instance_type = "t3.micro"
-  
+  instance_type = "t2.micro"
+
   vpc_security_group_ids = [aws_security_group.ec2-sg.id]
-  
-  user_data = base64encode(<<-EOF
-    #!/bin/bash
-    exec > /var/log/user-data.log 2>&1
-    set -e
-    
-    apt update -y
-    curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
-    apt install -y nodejs npm git
-    
-    git clone https://github.com/akkimahesh/apt-assignment.git /app
-    cd /app/app
-    npm install  # No sudo - runs as root
-    
-    cat > /etc/systemd/system/app.service << 'SERVICE'
-    [Unit]
-    Description=Node.js App
-    After=network.target
-    
-    [Service]
-    Type=simple
-    User=root
-    WorkingDirectory=/app/app
-    Environment=PORT=8080
-    ExecStart=/usr/bin/node server.js
-    Restart=always
-    RestartSec=5
-    
-    [Install]
-    WantedBy=multi-user.target
-    SERVICE
-    
-    systemctl daemon-reload
-    systemctl enable app
-    systemctl start app
-    
-    sleep 15 && curl -f http://localhost:8080/ || echo "Health check FAILED"
-    EOF
-  )
+
+  iam_instance_profile {
+    name = aws_iam_instance_profile.test_profile.name
+  }
+
+  user_data = file("user-data.sh")
 }
 
 
