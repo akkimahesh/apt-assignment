@@ -9,9 +9,9 @@ apt-get install -y nodejs npm git
 
 cd /home/ubuntu
 
-git clone https://github.com/akkimahesh/algo-trading-platform.git
+git clone https://github.com/akkimahesh/apt-assignment.git
 
-cd algo-trading-platform/app
+cd apt-assignment/app
 
 npm install
 
