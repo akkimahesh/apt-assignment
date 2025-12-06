@@ -60,7 +60,7 @@ resource "aws_lb_listener" "assignment" {
 
 resource "aws_launch_template" "nodejs_lt" {
   name_prefix   = "nodejs-lt"
-  image_id      = data.aws_ami.ubuntu_ami.id
+  image_id      = data.aws_ami.amazon_linux.id
   instance_type = "t2.micro"
 
   vpc_security_group_ids = [aws_security_group.ec2-sg.id]
