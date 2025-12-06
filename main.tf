@@ -117,7 +117,7 @@ resource "aws_iam_role_policy_attachment" "ssm" {
 
 resource "aws_autoscaling_group" "assignment_asg" {
   launch_template {
-    id      = aws_launch_template.nodejs_lt.id
+    id      = aws_launch_template.amazon_linux_lt.id
     version = "$Latest"
   }
 
