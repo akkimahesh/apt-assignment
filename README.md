@@ -279,5 +279,4 @@ This project demonstrates:
 
 ---
 
-![alt text](<Screenshot 2025-12-06 111433.png>)
 
