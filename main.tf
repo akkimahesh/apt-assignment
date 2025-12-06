@@ -58,7 +58,7 @@ resource "aws_lb_listener" "assignment" {
 
 # Launch Template 
 
-resource "aws_launch_template" "nodejs_lt" {
+resource "aws_launch_template" "amazon_linux_lt" {
   name_prefix   = "nodejs-lt"
   image_id      = data.aws_ami.amazon_linux.id
   instance_type = "t2.micro"
@@ -69,7 +69,7 @@ resource "aws_launch_template" "nodejs_lt" {
     name = aws_iam_instance_profile.test_profile.name
   }
 
-  user_data = file("user-data.sh")
+  user_data = base64encode(file("user-data.sh"))
 }
 
 
